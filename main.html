@@ -7,5 +7,16 @@
   </head>
   <body>
     <h1>Anasayfa</h1>
+    <input type="text" id="input" />
+    <button id="send-btn">Send</button>
+    <script>
+      const electron = require("electron");
+      const { ipcRenderer } = electron;
+      const sendButton = document.querySelector("#send-btn");
+      const input = document.querySelector("#input");
+      sendButton.addEventListener("click", () => {
+        ipcRenderer.send("key:inputValue", input.value);
+      });
+    </script>
   </body>
 </html>

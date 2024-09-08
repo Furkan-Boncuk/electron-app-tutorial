@@ -2,12 +2,20 @@ const electron = require("electron");
 const url = require("url");
 const path = require("path");
 
-const { app, BrowserWindow, Menu } = electron;
+const { app, BrowserWindow, Menu, ipcMain } = electron;
 
 let mainWindow;
 
 app.on("ready", () => {
-  mainWindow = new BrowserWindow({});
+  mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
+  });
+
   mainWindow.loadURL(
     url.format({
       pathname: path.join(__dirname, "main.html"),
@@ -19,6 +27,14 @@ app.on("ready", () => {
   const mainMenu = Menu.buildFromTemplate(mainMenuTemplate);
 
   Menu.setApplicationMenu(mainMenu);
+
+  ipcMain.on("key:inputValue", (err, data) => {
+    console.log(data);
+  });
+
+  mainWindow.on("closed", () => {
+    mainWindow = null;
+  });
 });
 
 const mainMenuTemplate = [
