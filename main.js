@@ -32,8 +32,12 @@ app.on("ready", () => {
     console.log(data);
   });
 
-  mainWindow.on("closed", () => {
-    mainWindow = null;
+  ipcMain.on("key:newWindow", (err, data) => {
+    createWindow();
+  });
+
+  mainWindow.on("close", () => {
+    app.quit();
   });
 });
 
@@ -73,5 +77,25 @@ if (process.env.NODE_ENV !== "production") {
         role: "reload",
       },
     ],
+  });
+}
+
+function createWindow() {
+  addWindow = new BrowserWindow({
+    width: 482,
+    height: 200,
+    title: "New Window",
+  });
+
+  addWindow.loadURL(
+    url.format({
+      pathname: path.join(__dirname, "/modal/modal.html"),
+      protocol: "file:",
+      slashes: true,
+    })
+  );
+
+  addWindow.on("close", () => {
+    addWindow = null;
   });
 }

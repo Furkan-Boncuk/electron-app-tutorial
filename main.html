@@ -3,19 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./main.css" />
     <title>Electron App Tutorial</title>
   </head>
   <body>
-    <h1>Anasayfa</h1>
-    <input type="text" id="input" />
-    <button id="send-btn">Send</button>
+    <div class="page-container">
+      <h1>Anasayfa</h1>
+      <div class="input-container">
+        <input type="text" id="input" />
+        <button id="send-btn">Send</button>
+      </div>
+      <div class="open-new-window-btn-container">
+        <button class="open-new-window-btn">Open New Window</button>
+      </div>
+    </div>
     <script>
       const electron = require("electron");
       const { ipcRenderer } = electron;
       const sendButton = document.querySelector("#send-btn");
       const input = document.querySelector("#input");
+      const openNewWindowButton = document.querySelector(
+        ".open-new-window-btn"
+      );
       sendButton.addEventListener("click", () => {
         ipcRenderer.send("key:inputValue", input.value);
+      });
+      openNewWindowButton.addEventListener("click", () => {
+        ipcRenderer.send("key:newWindow");
       });
     </script>
   </body>
