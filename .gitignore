@@ -1,0 +1,33 @@
+# Node.js klasörleri
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Electron spesifik dosyalar
+dist/
+out/
+temp/
+*.asar
+
+# Log dosyaları
+logs/
+*.log
+
+# Çeşitli sistem dosyaları
+.DS_Store       # macOS
+Thumbs.db       # Windows
+.idea/          # IDE dosyaları (WebStorm, PhpStorm, vb.)
+.vscode/        # Visual Studio Code ayar dosyaları
+
+# Derleme çıktıları
+build/
+release/
+
+# Çeşitli cache dosyaları
+.cache/
+*.bak
+*.swp
+
+# Ortam değişkenleri (Environment Variables)
+.env
